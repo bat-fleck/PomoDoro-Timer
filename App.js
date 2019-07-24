@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View,Button , Vibration} from 'react-native';
+import { StyleSheet, Text, View,Button , Vibration,TouchableOpacity} from 'react-native';
 import Constants from 'expo-constants';
+
 
 export default class App extends React.Component{
 	constructor(){
@@ -9,7 +10,7 @@ export default class App extends React.Component{
      		isStart:false,
     		isWork:true,
 			min:0,
-			sec:10,
+			sec:25,
 			isPause:false,
 			
 
@@ -22,7 +23,7 @@ export default class App extends React.Component{
 	startTimer(){
 		console.log("Hola!")
 		this.setState(prevState=>({
-			isStart:!prevState.isStart,
+			isStart:true,
 			isPause:false,
 	  	}))
 
@@ -55,14 +56,14 @@ export default class App extends React.Component{
 			if(this.state.isWork){
 				this.setState(prevState=>({
 					min:0,
-					sec:10,
-					isWork:!prevState.isWork
+					sec:5,
+					isWork:!prevState.is10Work
 				}))
 			}
 			else{
 				this.setState(prevState=>({
 					min:0,
-					sec:5,
+					sec:25,
 					isWork:!prevState.isWork
 				}))
 			}	
@@ -78,37 +79,76 @@ export default class App extends React.Component{
 	render(){
 		var t=0
     	return(
-    		<View style={styles.container}>
+    	
+	
+		<View style={styles.container}>
 
 				{/* Heading */}
-				<Text style={{fontFamily:'Roboto',fontSize:40,paddingTop:Constants.statusBarHeight}}>Pomodoro Timer</Text>
+				<Text style={{fontFamily:'',fontSize:40,paddingTop:Constants.statusBarHeight,color:'#ffffff'}}>Pomodoro Timer</Text>
 				{(this.state.isStart)?((this.state.isWork)?
-					(<Text style={{fontFamily:"Roboto",fontSize:30,color:"#788878"}}>Time To Work!</Text>):(<Text style={{fontFamily:"Roboto",fontSize:30}}>Take a Break!</Text>)):null
+					(<Text style={{fontFamily:"Roboto",fontSize:30,color:"#C0C0C0"}}>Time To Work!</Text>):(<Text style={{fontFamily:"Roboto",fontSize:30,color:"#C0C0C0"}}>Take a Break!</Text>)):null
 			
 				}		
         		
 				{/* Timer boi */}
 				<View style={{flex:2,justifyContent:'center'}}>
-          			<Text style={{fontSize:50,fontFamily:'sans-serif-condensed'}}>{this.state.min}:{this.state.sec}</Text>
+          			<Text style={{fontSize:50,fontFamily:'sans-serif-condensed',color:'white'}}>{this.state.min}:{this.state.sec}</Text>
         		</View>
 
 				{/* start button */}
         		{!(this.state.isStart) && (
 					<View style={{flex:1, justifyContent:'flex-start'}}>
-            			<Button title="Start" onPress={this.startTimer.bind(this)} />
-          			</View>  
+            			<TouchableOpacity style={styles.button} onPress={this.startTimer.bind(this)} ><Text style={styles.texty}>Start</Text></TouchableOpacity>    
+					</View>  
         		)}
 
 				{/* stop and reset button */}
         		{(this.state.isStart)&&(
-          			<View style={{flex:1, justifyContent:'flex-start'}}>
-						<Button title="Stop" onPress={()=>
+					(!this.state.isPause)?
+					(
+					<View style={{flex:1, justifyContent:'flex-start'}}>
+						<TouchableOpacity style={styles.button} onPress={()=>
 							this.setState({
 								isPause:true,
-							})
-						}/>
-            			<Button title="Restart"/>
+								//isStart:false,
+						})}><Text style={styles.texty}>Stop</Text></TouchableOpacity>
+
+						<TouchableOpacity style={styles.button} onPress={()=>
+							this.setState({
+								min:0,
+								sec:25,
+						})}><Text style={styles.texty}>Restart</Text></TouchableOpacity>
 				 	</View>
+					):
+					(
+					<View style={{flex:1, justifyContent:'flex-start'}}>
+
+						<TouchableOpacity style={styles.button} onPress={()=>
+							this.startTimer()
+						}><Text style={styles.texty}>Continue</Text></TouchableOpacity>
+
+            			<TouchableOpacity style={styles.button} onPress={
+							()=>{this.setState({
+								min:0,
+								sec:25,
+								isPause:false
+							})	
+						}}><Text style={styles.texty}>Restart</Text></TouchableOpacity>
+				 	</View>
+					)
+          			// <View style={{flex:1, justifyContent:'flex-start'}}>
+					// 	<Button title="Stop" onPress={()=>
+					// 		this.setState({
+					// 			isPause:true,
+					// 		})
+					// 	}/>
+            		// 	<Button title="Restart" onPress={
+					// 		()=>this.setState({
+					// 			min:0,
+					// 			sec:10,
+					// 		})
+					// 	}/>
+				 	// </View>
 				)}
 
       		</View>
@@ -121,9 +161,36 @@ export default class App extends React.Component{
 const styles = StyleSheet.create({
   	container: {
     	flex: 1,
-    	backgroundColor: '#fff',
-    	alignItems: 'center',
+    	backgroundColor: '#000000',
+		alignItems: 'center',
+		//justifyContent:'space-around'
    // paddingTop:Constants.statusBarHeight,
 	},
+
+	button:{
+		borderRadius:10,
+		paddingBottom:10,
+		borderColor:'#ffffff',
+		borderWidth:2,
+		backgroundColor:'#000000',
+		paddingLeft:25,
+		paddingRight:25,
+		
+
+		
+	},
+
+	texty:{
+		color:"#ff0000",
+		alignSelf:'center',
+		fontSize:30,
+		fontWeight:'bold'
+		// textShadowColor:'#ffcccc',
+		// textShadowOffset:{width:2,height:2},
+		// textShadowRadius:2,
+	}
+
+
+
 })	
 
