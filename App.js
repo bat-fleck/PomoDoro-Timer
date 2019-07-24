@@ -9,8 +9,8 @@ export default class App extends React.Component{
     	this.state={
      		isStart:false,
     		isWork:true,
-			min:0,
-			sec:25,
+			min:25,
+			sec:0,
 			isPause:false,
 			fontLoaded:false,
 			
@@ -64,15 +64,15 @@ export default class App extends React.Component{
 			Vibration.vibrate(500)
 			if(this.state.isWork){
 				this.setState(prevState=>({
-					min:0,
-					sec:5,
+					min:5,
+					sec:0,
 					isWork:!prevState.isWork
 				}))
 			}
 			else{
 				this.setState(prevState=>({
-					min:0,
-					sec:25,
+					min:25,
+					sec:0,
 					isWork:!prevState.isWork
 				}))
 			}	
@@ -125,8 +125,8 @@ export default class App extends React.Component{
 
 						<TouchableOpacity style={styles.button} onPress={()=>
 							this.setState({
-								min:0,
-								sec:25,
+								min:25,
+								sec:0,
 								isWork:true,
 						})}><Text style={styles.texty}>Restart</Text></TouchableOpacity>
 				 	</View>
@@ -140,8 +140,8 @@ export default class App extends React.Component{
 
             			<TouchableOpacity style={styles.button} onPress={
 							()=>{this.setState({
-								min:0,
-								sec:25,
+								min:5,
+								sec:0,
 								isPause:false,
 								isWork:true,
 							})	
