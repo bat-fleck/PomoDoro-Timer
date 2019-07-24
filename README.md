@@ -9,8 +9,10 @@ There are six steps in this technique:
 2.Start the pomodoro timer (25 minutes).
 3.Work on the task.
 4.End work when the timer rings and put a checkmark on a piece of paper.
-5.If you have fewer than four checkmarks, take a short break of 5 minutes, then go to step 2.
-6. After four pomodoros, take a longer break (15–30 minutes), press reset and then go to step 1.
+5.If you have fewer than four checkmarks, take a short break of 5 minutes.
+6.After four pomodoros, press "Stop" and take a longer break (15–30 minutes). 
+7.Press "Reset" and start working again.
+
 ```
 ## Functions
 
@@ -18,3 +20,11 @@ There are six steps in this technique:
 Start:To start a Pomodoro. <br/>
 Stop :To pause a Pomodoro. <br/>
 Reset:To reset a Pomodoro.
+
+## Some Screenshots
+
+|                                     |                                     |                                     |
+|-------------------------------------|-------------------------------------|-------------------------------------|
+|![screen1](./screenshots/screen1.png)|![screen2](./screenshots/screen2.png)|![screen3](./screenshots/screen3.png)|
+
+
