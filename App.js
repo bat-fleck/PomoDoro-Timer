@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View,Button , Vibration,TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View,Button , Vibration,TouchableOpacity,ActivityIndicator} from 'react-native';
 import Constants from 'expo-constants';
-
+import {Font} from 'expo';
 
 export default class App extends React.Component{
 	constructor(){
@@ -12,10 +12,19 @@ export default class App extends React.Component{
 			min:0,
 			sec:25,
 			isPause:false,
+			fontLoaded:false,
 			
 
 		}
 		
+	}
+
+	async componentDidMount(){
+		await Font.loadAsync({
+			"fonto":require("./assets/fonts/ShadowsIntoLight.ttf")
+		})
+
+		this.setState({fontLoaded:true})
 	}
 
 	
@@ -57,7 +66,7 @@ export default class App extends React.Component{
 				this.setState(prevState=>({
 					min:0,
 					sec:5,
-					isWork:!prevState.is10Work
+					isWork:!prevState.isWork
 				}))
 			}
 			else{
@@ -79,20 +88,21 @@ export default class App extends React.Component{
 	render(){
 		var t=0
     	return(
-    	
-	
-		<View style={styles.container}>
-
+				<View style={styles.container}>
 				{/* Heading */}
-				<Text style={{fontFamily:'',fontSize:40,paddingTop:Constants.statusBarHeight,color:'#ffffff'}}>Pomodoro Timer</Text>
-				{(this.state.isStart)?((this.state.isWork)?
-					(<Text style={{fontFamily:"Roboto",fontSize:30,color:"#C0C0C0"}}>Time To Work!</Text>):(<Text style={{fontFamily:"Roboto",fontSize:30,color:"#C0C0C0"}}>Take a Break!</Text>)):null
-			
-				}		
+				{this.state.fontLoaded?
+				(<Text style={{fontFamily:'fonto',fontSize:40,paddingTop:Constants.statusBarHeight,color:'#b3b3ff'}}>Pomodoro Timer</Text>):
+				(null)}
+				
+					
         		
 				{/* Timer boi */}
-				<View style={{flex:2,justifyContent:'center'}}>
-          			<Text style={{fontSize:50,fontFamily:'sans-serif-condensed',color:'white'}}>{this.state.min}:{this.state.sec}</Text>
+				<View style={{flex:2,justifyContent:'center',alignItems:'center'}}>
+				{(this.state.isStart)?((this.state.isWork)?
+					(<Text style={{fontFamily:"fonto",fontSize:30,color:"#C0C0C0"}}>Time To Work!</Text>):(<Text style={{fontFamily:"fonto",fontSize:30,color:"#C0C0C0"}}>Take a Break!</Text>)):null
+			
+				}	
+          			<Text style={{fontSize:50,fontFamily:'sans-serif-condensed',color:'#b3b3ff'}}>{this.state.min}:{this.state.sec}</Text>
         		</View>
 
 				{/* start button */}
@@ -117,6 +127,7 @@ export default class App extends React.Component{
 							this.setState({
 								min:0,
 								sec:25,
+								isWork:true,
 						})}><Text style={styles.texty}>Restart</Text></TouchableOpacity>
 				 	</View>
 					):
@@ -131,27 +142,16 @@ export default class App extends React.Component{
 							()=>{this.setState({
 								min:0,
 								sec:25,
-								isPause:false
+								isPause:false,
+								isWork:true,
 							})	
 						}}><Text style={styles.texty}>Restart</Text></TouchableOpacity>
 				 	</View>
 					)
-          			// <View style={{flex:1, justifyContent:'flex-start'}}>
-					// 	<Button title="Stop" onPress={()=>
-					// 		this.setState({
-					// 			isPause:true,
-					// 		})
-					// 	}/>
-            		// 	<Button title="Restart" onPress={
-					// 		()=>this.setState({
-					// 			min:0,
-					// 			sec:10,
-					// 		})
-					// 	}/>
-				 	// </View>
 				)}
+				</View>
 
-      		</View>
+     
 
     	)
   	}	
@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
 		backgroundColor:'#000000',
 		paddingLeft:25,
 		paddingRight:25,
+		paddingTop:10,
 		
 
 		
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
 	texty:{
 		color:"#ff0000",
 		alignSelf:'center',
-		fontSize:30,
+		fontSize:20,
 		fontWeight:'bold'
 		// textShadowColor:'#ffcccc',
 		// textShadowOffset:{width:2,height:2},
