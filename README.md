@@ -4,7 +4,7 @@ Pomodoro is a technique to increase your productivity and to manage time better
 A goal of the technique is to reduce the impact of internal and external interruptions on focus and flow. 
 
 ```
-There are six steps in this technique:
+There are seven steps in this technique:
 1.Decide on the task to be done.
 2.Start the pomodoro timer (25 minutes).
 3.Work on the task.
