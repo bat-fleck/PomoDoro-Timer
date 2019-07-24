@@ -1,7 +1,7 @@
 # PomoDoro-Timer
 
 Pomodoro is a technique to increase your productivity and to manage time better  
-⋅⋅⋅ A goal of the technique is to reduce the impact of internal and external interruptions on focus and flow. 
+... A goal of the technique is to reduce the impact of internal and external interruptions on focus and flow. 
 
 ```
 There are six steps in the original technique:
