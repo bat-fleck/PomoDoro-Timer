@@ -21,6 +21,10 @@ Start:To start a Pomodoro. <br/>
 Stop :To pause a Pomodoro. <br/>
 Reset:To reset a Pomodoro.
 
+## Link to download the app
+
+[Click Here](https://expo.io/artifacts/ab35e607-13d5-4061-b3d0-1cb8c70812f5)
+
 ## Some Screenshots
 
 |                                     |                                     |                                     |
